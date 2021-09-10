@@ -3,7 +3,7 @@ var h=window.innerHeight;
 var wMod=w/(Math.round(w/20));
 var hMod=h/(Math.round(h/20));
 var menu_width=5*wMod;
-var imageW=40*wMod;
+var imageW=30*wMod;
 var imR=2/3;
 if (imageW>w-2*(menu_width+3*wMod))
 	imageW=w-2*(menu_width+3*wMod)
@@ -22,21 +22,34 @@ function get_block() {
 function add_about(canvas_stage) {
 	let block = get_block()
 	let topic = document.createElement('p');
-	topic.setAttribute('id','text');
+	let image_width = imageW * imR;
+	topic.setAttribute('id','topic');
 	topic.style.width= menu_width  +'px';
+	topic.style.paddingTop = 50  + "px";
 	topic.style.paddingLeft=1*wMod;
 	topic.innerHTML = "Amir Hertz";
 	block.appendChild(topic);
 	let offset = offset_left - menu_width - wMod;
 	let about_text = document.createElement('p');
 	about_text.setAttribute('id','text_a');
-	about_text.style.width= imR*imageW+'px';
+	about_text.style.width=  image_width+'px';
 	about_text.style.textAlign = "left";
 	about_text.style.paddingLeft = offset;
-	about_text.style.top=2 * hMod +'px';
+
 	about_text.innerHTML=document.getElementById('about').innerHTML;
 	block.appendChild(about_text);
+	let image_elem = document.createElement('img');
+	image_elem.setAttribute('id','photo');
+	image_elem.style.paddingLeft = offset  + "px";
+	image_elem.style.paddingTop = 50  + "px";
+	image_elem.src="20170713_100828.jpg";
+	block.appendChild(image_elem);
 	canvas_stage.appendChild(block);
+	console.log(about_text.offsetHeight);
+	console.log(about_text.style.height);
+	console.log(about_text.clientHeight);
+	image_elem.style.height = about_text.offsetHeight - 100;
+	image_elem.style.width = "auto"
 	return about_text.offsetHeight;
 }
 
@@ -50,7 +63,7 @@ function add_publication(canvas_stage) {
 			let offset = offset_left
 			if (p === 0){
 				let topic = document.createElement('p');
-				topic.setAttribute('id','text');
+				topic.setAttribute('id','topic');
 				topic.style.width= menu_width  +'px';
 				topic.style.paddingLeft=1*wMod;
 				topic.innerHTML = "Publications";
@@ -80,9 +93,10 @@ function add_publication(canvas_stage) {
 function add_awards(canvas_stage) {
 	let block = get_block()
 	let topic = document.createElement('p');
-	topic.setAttribute('id','text');
+	topic.setAttribute('id','topic');
 	topic.style.width= menu_width  +'px';
 	topic.style.paddingLeft=1*wMod;
+	topic.style.paddingTop = 50  + "px";
 	topic.innerHTML = "Awards";
 	block.appendChild(topic);
 	let offset = offset_left - menu_width - wMod;
