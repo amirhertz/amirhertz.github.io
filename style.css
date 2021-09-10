@@ -1,0 +1,109 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+#canvas_stage{
+	text-align:left;
+	width:100%;
+	position: absolute;left:0px; top:0px;
+	overflow-x: hidden;
+}
+
+#mainId{
+	text-align:left;
+	/*font-family:'Maven';*/
+	font-family: arial;
+	font-size: 13px;
+	line-height: 13px;
+	width:100%;
+	display:block;
+	position: absolute;left:0px; top:0px;
+	overflow-x: hidden;
+}
+
+#menu{
+	position: fixed;left:0px; top:0px;
+}
+#topic0{
+	display:block;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	
+	font-size: 16px;
+	
+	color: rgb(255, 0, 0);
+	
+}
+#topic0{
+	
+	display:none;
+	position: absolute;left:0px; top:0px;
+	/*border: 1px solid;
+	transition: left 0.14s ease-out, top 0.14s ease-out;*/
+}
+#topic1{
+	
+	display:block;
+	position: absolute;left:0px; top:0px;
+	/*border: 1px solid;
+	transition: left 0.14s ease-out, top 0.14s ease-out;*/
+}
+
+#text_a{
+	display:block;
+	width:50%;
+	float:left;
+	line-height: 22px;
+
+	padding-bottom: 50px;
+	padding-top: 50px;
+}
+#text{
+
+	/*text-align: center;*/
+	/*display:block;*/
+	/*position: relative;*/
+	margin-top: 10px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 10px;
+	text-align: left;
+	line-height: 26px;
+	width:30%;
+	float:left;
+}
+
+
+#photo{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	display:block;
+	/*position: relative;*/
+	width:50%;
+	float:left;
+	/*height: 400px;*/
+	/*border: 1px solid;*/
+	
+}
+
+#block_elem{
+	
+	display:block;
+	position: relative;
+	/*align-items: baseline;*/
+	width:100%;
+	clear: both;
+	/*border: 1px solid;*/
+	
+}
+
+
+.draft{
+
+	display:none;
+	position: absolute;left:0px; top:0px;
+	text-align: left;
+	line-height: 26px;
+
+}
