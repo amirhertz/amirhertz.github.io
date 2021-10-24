@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="SAPE: Spatially-Adaptive Progressive Encoding for Neural Optimization">
+    <meta name="author" content="Amir Hertz,
+                                 Or Perel,
+                                 Raja Giryes,
+                                 Olga Sorkine-Hornung,
+                                 Daniel Cohen-Or">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet">
+
+    <!-- image-compare CSS -->
+    <link rel="stylesheet" type="text/css" href="node_modules/image-compare-viewer/dist/image-compare-viewer.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+
+    <title>SAPE: Spatially-Adaptive Progressive Encoding for Neural Optimization</title>
+  </head>
+  <body>
+
+    <div style="background:transparent !important" class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h2>SAPE: Spatially-Adaptive<br>Progressive Encoding for Neural Optimization</h2>
+          <h3>NeurIPS 2021</h3>
+          <hr>
+          <p class="authors">
+              <a href="https://amirhertz.github.io/"> Amir Hertz</a><sup>1</sup>,
+              <a href="https://orperel.github.io/"> Or Perel</a><sup>1</sup>,
+              <a href="web.eng.tau.ac.il/~raja"> Raja Giryes</a><sup>1</sup>,</br>
+              <a href="https://igl.ethz.ch/people/sorkine/"> Olga Sorkine-Hornung</a><sup>2</sup>,
+              <a href="https://danielcohenor.com/"> Daniel Cohen-Or</a><sup>1</sup>
+          </p>
+          <p>
+              <i><sup>1</sup> Tel Aviv University, <sup>2</sup> ETH Zurich, Switzerland </i>
+          </p>
+          <div class="btn-toolbar" role="group" aria-label="Top menu">
+              <a class="btn btn-primary" href="https://arxiv.org/abs/2104.09125"><img src="resource/icons/paper.png" alt="" class="icon"> Paper</a>
+              <a class="btn btn-primary" href="https://arxiv.org/abs/2104.09125"><img src="resource/icons/arxiv.png" alt="" class="icon"> Arxiv</a>
+              <a class="btn btn-primary" href=""><img src="resource/icons/supplamentry.png" alt="" class="icon"> Supplementary</a>
+              <a class="btn btn-primary" href=""><img src="resource/icons/code.png" alt="" class="icon"> Code</a>
+              <a class="btn btn-primary" href=""><img src="resource/icons/video.png" alt="" class="icon"> Video</a>
+              <a class="btn btn-primary" href=""><img src="resource/icons/slides.png" alt="" class="icon"> Slides</a>
+          </div>
+        </div>
+    </div>
+
+    <div class="container">
+      <div class="section">
+        <h2>What is SAPE about?</h2>  
+
+        <div class="box">
+          <div class="slider-nav">
+            <div class="slide-btn">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="rectangle rounded">
+                    <h5>Spectral Bias</h5>
+                    When used to fit neural implicit functions, Multilayer Perceptrons are likely to learn the global, lower frequencies of signals earlier. At the same time, they struggle to fit local, high frequencies. This phenomenon was termed by <a href="https://arxiv.org/abs/1806.08734">Rahaman et al. 2019 </a> as "Spectral Bias".
+                  </div>
+                </div>
+                <div class="col-md-6 photo">
+                  <span>
+                    <img src="resource/fig/mlp.png" alt="...">
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="slide-btn">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="rectangle rounded">
+                    <h5>Positional Encoding</h5>
+                    One way to overcome "Spectral Bias" is by mapping input coordinates to a higher dimensional space via <a href="https://arxiv.org/abs/2006.10739">"Positional Encoding"</a>.
+                    Doing so, however, generally requires manually tuning the scale of the encoding frequency band.
+                  </div>
+                </div>
+                <div class="col-md-6 photo">
+                  <span>
+                    <img src="resource/fig/pe_siren.png" alt="...">
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="slide-btn">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="rectangle rounded">
+                    <h5>Progressive Positional Encoding</h5>
+                    SAPE avoids manual tuning by employing a simple policy of progressively revealing the positional encoding to the network.
+                  </div>
+                </div>
+                <div class="col-md-6 photo">
+                  <span>
+                    <img src="resource/fig/progressive.png" alt="...">
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="slide-btn">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="rectangle rounded">
+                    <h5>Spatially Adaptive Progression</h5>
+                    In addition, SAPE maintains a record of progression per portion of the neural implicit signal.
+                    The progression rate per part is stimulated by a feedback loop according to the loss function.<br><br>
+                    As a result, SAPE is able to learn high quality neural implicit functions with minimal manual intervention.
+                  </div>
+                </div>
+                <div class="col-md-6 photo">
+                  <span>
+                    <img src="resource/fig/spatially_adaptive.png" alt="...">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slider-dots-box"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="section">
+        Multilayer-perceptrons (MLP) are known to struggle with learning functions of high-frequencies, and in particular cases with wide frequency bands. We present a spatially adaptive progressive encoding (SAPE) scheme for input signals of MLP networks, which enables them to better fit a wide range of frequencies without sacrificing training stability or requiring any domain specific preprocessing. SAPE gradually unmasks signal components with increasing frequencies as a function of time and space. The progressive exposure of frequencies is monitored by a feedback loop throughout the neural optimization process, allowing changes to propagate at different rates among local spatial portions of the signal space. We demonstrate the advantage of SAPE on a variety of domains and applications, including regression of low dimensional signals and images, representation learning of occupancy networks, and a geometric task of mesh transfer between 3D shapes.
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="section">
+          <h2>Representation of 1D Signals</h2>
+          <hr>
+          <p>
+              With SAPE, neural nets can faithfully represent implicit 1D signals of varying frequency.<br>
+              In the example below the network attempts to learn the representation of a 1D function represented by the <b> black </b> curve. 
+              The training samples are shown in <b><font color="red"> red </font></b>.
+          </p>
+            <div class="container">
+              <div class="row align-items-center mx-md-n1">
+                <div class="col-md-3 px-md-1">
+                  <h5> MLP </h5>
+                </div>
+                <div class="col-md-3 px-md-1">
+                  <h5> Fourier Feature Networks </h5>
+                </div> 
+                <div class="col-md-3 px-md-1">
+                  <h5> SAPE </h5>
+                </div> 
+                <div class="col-md-3 px-md-1">
+                  <h5> Ground Truth </h5>
+                </div> 
+              </div> 
+              <div class="row align-items-center mx-md-n1">
+                <div class="col-md-3 px-md-1">
+                  <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
+                    <source src="resource/1d/no_encoding_no_control.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="col-md-3 px-md-1">
+                  <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
+                    <source src="resource/1d/ff_no_control.mp4" type="video/mp4">
+                  </video>
+                </div> 
+                <div class="col-md-3 px-md-1">
+                  <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
+                    <source src="resource/1d/ff_spatial_progression_stashed.mp4" type="video/mp4">
+                  </video>
+                </div> 
+                <div class="col-md-3 px-md-1">
+                  <img src="resource/1d/target.png" alt="1D Target" style="width:100%;">
+                </div> 
+              </div> 
+            </div>
+          </div>
+      </div>
+    </div>
+
+<!--                 <div class="col-md-3 px-md-1">
+                  <h5> Training Samples </h5>
+                </div> 
+              <div class="row align-items-center mx-md-n1">
+                <div class="col-md-3 px-md-1">
+                    <img src="resource/2d/snow_target_masked.png" alt="" style="width:100%;">
+                  </div>
+              </div> -->
+
+    <div class="container">
+      <div class="section">
+          <h2>Regression of 2D images</h2>
+          <hr>
+          <p>
+              SAPE is able to fit a wide range of natural images without tuning the positional encoding frequency scale. <br>
+              By sampling 25% of the original pixels in the image, SAPE is still able to reconstruct small details of the original signal. <br>
+              Note that SAPE's performance is capped by the sampling rate (e.g: details smaller than the sampling rate are not guaranteed to be captured) .
+          </p>
+          <!-- <div class="row align-items-center"> -->
+            <div class="container">
+              <div class="row align-items-center mx-md-n1">
+                <div class="col-md-4 px-md-1">
+                  <h5> MLP </h5>
+                </div>
+                <div class="col-md-4 px-md-1">
+                  <h5> Fourier Feature Networks </h5>
+                </div> 
+                <div class="col-md-4 px-md-1">
+                  <h5> SAPE </h5>
+                </div> 
+              </div> 
+              <div class="row align-items-center mx-md-n1">
+                <div class="col-md-4 px-md-1">
+                  <div class="image-compare" style="width:100%;">
+                    <img src="resource/2d/snow_no_encoding_no_control.gif" alt="">
+                    <img src="resource/2d/snow_target.png" alt="">
+                  </div>
+                </div>
+                <div class="col-md-4 px-md-1">
+                  <div class="image-compare" style="width:100%;">
+                    <img src="resource/2d/snow_ff_no_control.gif" alt="">
+                    <img src="resource/2d/snow_target.png" alt="">
+                  </div>
+                </div> 
+                <div class="col-md-4 px-md-1">
+                  <div class="image-compare" style="width:100%;">
+                    <img src="resource/2d/snow_ff_spatial_progression_stashed.gif" alt="">
+                    <img src="resource/2d/snow_target.png" alt="">
+                  </div>
+                </div> 
+              </div> 
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="section">
+          <h2>Representation of 3D shapes</h2>
+          <hr>
+          <p>
+              SAPE is also useful for learning the representation of 3d occupancy implicit functions. <br>
+              In the examples below, points were sampled uniformly in space and near the shape's surface. <br>
+              Note the result presented is a mesh converted from a neural implicit function using Marching Cubes.
+          </p>
+            <div class="container">
+              <div class="row align-items-center mx-md-n1">
+                <div class="col-md-3 px-md-1">
+                  <h5> MLP </h5>
+                </div>
+                <div class="col-md-3 px-md-1">
+                  <h5> Fourier Feature Networks </h5>
+                </div> 
+                <div class="col-md-3 px-md-1">
+                  <h5> SAPE </h5>
+                </div> 
+                <div class="col-md-3 px-md-1">
+                  <h5> Ground Truth </h5>
+                </div> 
+              </div> 
+<!-- 
+              <div class="row align-items-center mx-md-n1">
+                <div class="col-md-3 px-md-1">
+                  <model-viewer
+                          alt="Statue"
+                          src="resource/glb/MalteseFalconSolid_final_no_encoding_no_control.glb"
+                          style="width: 100%; height:300px; background-color: #404040"
+                          exposure="1.0"
+                          camera-orbit="0deg 150deg 105%"
+                          camera-controls>
+                  </model-viewer>
+                </div>
+                <div class="col-md-3 px-md-1">
+                  <model-viewer
+                          alt="Statue"
+                          src="resource/glb/MalteseFalconSolid_final_ff_no_control.glb"
+                          style="width: 100%; height:300px; background-color: #404040"
+                          exposure=".8"
+                          camera-orbit="0deg 150deg 105%"
+                          camera-controls>
+                  </model-viewer>
+                </div> 
+                <div class="col-md-3 px-md-1">
+                  <model-viewer
+                          alt="Statue"
+                          src="resource/glb/MalteseFalconSolid_final_ff_spatial_progression_stashed.glb"
+                          style="width: 100%; height:300px; background-color: #404040"
+                          exposure=".8"
+                          camera-orbit="0deg 150deg 105%"
+                          camera-controls>
+                  </model-viewer>
+                </div> 
+                <div class="col-md-3 px-md-1">
+                  <model-viewer
+                          alt="Statue"
+                          src="resource/glb/MalteseFalconSolid_gt.glb"
+                          style="width: 100%; height:300px; background-color: #404040"
+                          exposure=".8"
+                          camera-orbit="0deg 150deg 105%"
+                          camera-controls>
+                  </model-viewer>
+                </div> 
+              </div> 
+              <br> -->
+              <div class="row align-items-center mx-md-n1">
+                <div class="col-md-3 px-md-1">
+                  <model-viewer
+                          alt="Statue"
+                          src="resource/glb/Slic3r_friendly_pt5_scale_tilted_final_no_encoding_no_control.glb"
+                          style="width: 100%; height:300px; background-color: #404040"
+                          exposure="1.0"
+                          camera-orbit="0deg 150deg 105%"
+                          camera-controls>
+                  </model-viewer>
+                </div>
+                <div class="col-md-3 px-md-1">
+                  <model-viewer
+                          alt="Statue"
+                          src="resource/glb/Slic3r_friendly_pt5_scale_tilted_final_ff_no_control.glb"
+                          style="width: 100%; height:300px; background-color: #404040"
+                          exposure=".8"
+                          camera-orbit="0deg 150deg 105%"
+                          camera-controls>
+                  </model-viewer>
+                </div> 
+                <div class="col-md-3 px-md-1">
+                  <model-viewer
+                          alt="Statue"
+                          src="resource/glb/Slic3r_friendly_pt5_scale_tilted_final_ff_spatial_progression_stashed.glb"
+                          style="width: 100%; height:300px; background-color: #404040"
+                          exposure=".8"
+                          camera-orbit="0deg 150deg 105%"
+                          camera-controls>
+                  </model-viewer>
+                </div> 
+                <div class="col-md-3 px-md-1">
+                  <model-viewer
+                          alt="Statue"
+                          src="resource/glb/Slic3r_friendly_pt5_scale_tilted_gt.glb"
+                          style="width: 100%; height:300px; background-color: #404040"
+                          exposure=".8"
+                          camera-orbit="0deg 150deg 105%"
+                          camera-controls>
+                  </model-viewer>
+                </div> 
+              </div> 
+              <br>
+              <div class="row align-items-center mx-md-n1">
+                <div class="col-md-3 px-md-1">
+                  <model-viewer
+                          alt="Statue"
+                          src="resource/glb/wave2_final_no_encoding_no_control.glb"
+                          style="width: 100%; height:300px; background-color: #404040"
+                          exposure="1.0"
+                          camera-orbit="0deg 150deg 105%"
+                          camera-controls>
+                  </model-viewer>
+                </div>
+                <div class="col-md-3 px-md-1">
+                  <model-viewer
+                          alt="Statue"
+                          src="resource/glb/wave2_final_ff_no_control.glb"
+                          style="width: 100%; height:300px; background-color: #404040"
+                          exposure=".8"
+                          camera-orbit="0deg 150deg 105%"
+                          camera-controls>
+                  </model-viewer>
+                </div> 
+                <div class="col-md-3 px-md-1">
+                  <model-viewer
+                          alt="Statue"
+                          src="resource/glb/wave2_final_ff_spatial_progression_stashed.glb"
+                          style="width: 100%; height:300px; background-color: #404040"
+                          exposure=".8"
+                          camera-orbit="0deg 150deg 105%"
+                          camera-controls>
+                  </model-viewer>
+                </div> 
+                <div class="col-md-3 px-md-1">
+                  <model-viewer
+                          alt="Statue"
+                          src="resource/glb/wave2_gt.glb"
+                          style="width: 100%; height:300px; background-color: #404040"
+                          exposure=".8"
+                          camera-orbit="0deg 150deg 105%"
+                          camera-controls>
+                  </model-viewer>
+                </div> 
+              </div> 
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="section">
+          <h2>Deformation of 2D Silhouettes</h2>
+          <hr>
+          <p>
+              In the following task, SAPE is pretrained to output the coordinates of a unit circle. <br>
+              The network is then optimized to trace the boundaries of a target shape.
+          </p>
+        <div class="row align-items-center mx-md-n1">
+          <div class="col-md-3 px-md-1">
+            <img src="resource/fig/sape_animation1.gif" alt="" class="icon" style="width:100%">
+          </div>
+          <div class="col-md-3 px-md-1">
+            <img src="resource/fig/sape_animation2.gif" alt="" class="icon" style="width:100%">
+          </div> 
+          <div class="col-md-3 px-md-1">
+            <img src="resource/fig/sape_animation3.gif" alt="" class="icon" style="width:100%">
+          </div> 
+          <div class="col-md-3 px-md-1">
+            <img src="resource/fig/sape_animation4.gif" alt="" class="icon" style="width:100%">
+          </div> 
+        </div> 
+      </div> 
+    </div> 
+
+    <div class="container">
+      <div class="section">
+        <h2>Related Works</h2>
+        <hr>
+        <div class="row align-items-center mx-md-n1">
+          <div class="col-md-6 px-md-1">
+            <p>
+              <h3>Baselines</h3>
+              <ol>
+                <li>Fourier Feature Networks</li>
+                <li>SIREN</li>
+                <li>Spectral Bias of Neural Networks</li>
+              </ol>
+            </p>
+          </div>
+          <div class="col-md-6 px-md-1">
+            <p>
+                <h3>Concurrent Works</h3>
+                <ol>
+                  <li>Modulated SIREN</li>
+                  <li>Nerfies</li>
+                  <li>BARF</li>
+                </ol>
+            </p>
+          </div> 
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="section">
+        <h2>BibTeX</h2>
+        <hr>
+          <div class="bibtexsection">
+              @article{hertz2021sape,
+                title={SAPE: Spatially-Adaptive Progressive Encoding for Neural Optimization}, 
+                author={Amir Hertz and Or Perel and Raja Giryes and Olga Sorkine-Hornung and Daniel Cohen-Or},
+                journal={arXiv preprint arXiv:2104.09125},
+                year={2021}
+              }
+          </div>
+      </div>
+    </div>
+
+    <br><br>
+
+    <!-- ------------- -->
+    <!-- SCRIPTS BLOCK -->
+    <!-- ------------- -->
+
+    <!-- 2d image comparison -->
+    <script src="node_modules/image-compare-viewer/dist/image-compare-viewer.min.js">
+      import ImageCompare from "image-compare-viewer";
+    </script>
+
+    <script type="text/javascript">
+
+        let imageCompareViewers = document.querySelectorAll("div.image-compare");
+
+        let config = {
+            controlColor: "#eeeeee",
+            controlShadow: false,
+            startingPoint: 50,
+            smoothingAmount: 150,
+            showLabels: true,
+            labelOptions: {
+              before: "Output",
+              after: "Ground Truth",
+              onHover: false, // default
+            },
+          }
+
+        imageCompareViewers.forEach((element, i) => {
+          new ImageCompare(element, config).mount();
+        });
+      </script>
+
+
+    <!-- 3d models -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"> </script>
+    <script>
+    (() => {
+      const modelViewers = document.querySelectorAll("model-viewer");
+
+      modelViewers.forEach((modelViewer, i) => {
+
+        const tapDistance = 2;
+        let panning = false;
+        let panX, panY;
+        let startX, startY;
+        let lastX, lastY;
+        let metersPerPixel;
+
+        const startPan = () => {
+          const orbit = modelViewer.getCameraOrbit();
+          const {theta, phi, radius} = orbit;
+          const psi = theta - modelViewer.turntableRotation;
+          metersPerPixel = 0.75 * radius / modelViewer.getBoundingClientRect().height;
+          panX = [-Math.cos(psi), 0, Math.sin(psi)];
+          panY = [
+            -Math.cos(phi) * Math.sin(psi),
+            Math.sin(phi),
+            -Math.cos(phi) * Math.cos(psi)
+          ];
+          modelViewer.interactionPrompt = 'none';
+        };
+
+        const movePan = (thisX, thisY) => {
+          const dx = (thisX - lastX) * metersPerPixel;
+          const dy = (thisY - lastY) * metersPerPixel;
+          lastX = thisX;
+          lastY = thisY;
+
+          const target = modelViewer.getCameraTarget();
+          target.x += dx * panX[0] + dy * panY[0];
+          target.y += dx * panX[1] + dy * panY[1];
+          target.z += dx * panX[2] + dy * panY[2];
+          modelViewer.cameraTarget = `${target.x}m ${target.y}m ${target.z}m`;
+
+          // This pauses turntable rotation
+          modelViewer.dispatchEvent(new CustomEvent(
+                'camera-change', {detail: {source: 'user-interaction'}}));
+        };
+
+        const recenter = (pointer) => {
+          panning = false;
+          if (Math.abs(pointer.clientX - startX) > tapDistance ||
+              Math.abs(pointer.clientY - startY) > tapDistance)
+            return;
+          const rect = modelViewer.getBoundingClientRect();
+          const x = pointer.clientX - rect.left;
+          const y = pointer.clientY - rect.top;
+          const hit = modelViewer.positionAndNormalFromPoint(x, y);
+          modelViewer.cameraTarget =
+              hit == null ? 'auto auto auto' : hit.position.toString();
+        };
+
+        modelViewer.addEventListener('mousedown', (event) => {
+          startX = event.clientX;
+          startY = event.clientY;
+          panning = event.button === 2 || event.ctrlKey || event.metaKey ||
+              event.shiftKey;
+          if (!panning)
+            return;
+
+          lastX = startX;
+          lastY = startY;
+          startPan();
+          event.stopPropagation();
+        }, true);
+
+        modelViewer.addEventListener('touchstart', (event) => {
+          const {targetTouches, touches} = event;
+          startX = targetTouches[0].clientX;
+          startY = targetTouches[0].clientY;
+          panning = targetTouches.length === 2 && targetTouches.length === touches.length;
+          if (!panning)
+            return;
+
+          lastX = 0.5 * (targetTouches[0].clientX + targetTouches[1].clientX);
+          lastY = 0.5 * (targetTouches[0].clientY + targetTouches[1].clientY);
+          startPan();
+        }, true);
+
+        self.addEventListener('mousemove', (event) => {
+          if (!panning)
+            return;
+
+          movePan(event.clientX, event.clientY);
+          event.stopPropagation();
+        }, true);
+
+        modelViewer.addEventListener('touchmove', (event) => {
+          if (!panning || event.targetTouches.length !== 2)
+            return;
+
+          const {targetTouches} = event;
+          const thisX = 0.5 * (targetTouches[0].clientX + targetTouches[1].clientX);
+          const thisY = 0.5 * (targetTouches[0].clientY + targetTouches[1].clientY);
+          movePan(thisX, thisY);
+        }, true);
+
+        self.addEventListener('mouseup', (event) => {
+          recenter(event);
+        }, true);
+        
+        modelViewer.addEventListener('touchend', (event) => {
+          if (event.targetTouches.length === 0) {
+            recenter(event.changedTouches[0]);
+
+            if (event.cancelable) {
+              event.preventDefault();
+            }
+          }
+        }, true);
+      });
+    })();
+    </script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" 
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" 
+            crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous">      
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous">
+    </script>
+
+    <!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
+    <script type="text/javascript" src="slick/slick.min.js"></script>
+
+    <script type="text/javascript">
+
+      $('.slider-nav').slick({
+        pauseOnHover: true,
+        fade: false,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed:3000,
+        focusOnSelect: true,
+        dots: true,
+        arrows: true,
+        centerMode: true
+      });
+
+    </script>
+
+  </body>
+</html>
