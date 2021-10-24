@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@google/model-viewer": "^1.9.0",
-    "bulma": "^0.9.3",
-    "image-compare-viewer": "^1.5.0"
-  }
-}
