@@ -44,12 +44,12 @@
               <i><sup>1</sup> Tel Aviv University, <sup>2</sup> ETH Zurich, Switzerland </i>
           </p>
           <div class="btn-toolbar" role="group" aria-label="Top menu">
-              <a class="btn btn-primary" href="https://arxiv.org/abs/2104.09125"><img src="resource/icons/paper.png" alt="" class="icon"> Paper</a>
+              <a class="btn btn-primary" href="attachment/SAPE_paper.pdf"><img src="resource/icons/paper.png" alt="" class="icon"> Paper</a>
+              <a class="btn btn-primary" href="attachment/SAPE_supplementary.pdf"><img src="resource/icons/supplamentry.png" alt="" class="icon"> Supplementary</a>
               <a class="btn btn-primary" href="https://arxiv.org/abs/2104.09125"><img src="resource/icons/arxiv.png" alt="" class="icon"> Arxiv</a>
-              <a class="btn btn-primary" href=""><img src="resource/icons/supplamentry.png" alt="" class="icon"> Supplementary</a>
-              <a class="btn btn-primary" href=""><img src="resource/icons/code.png" alt="" class="icon"> Code</a>
-              <a class="btn btn-primary" href=""><img src="resource/icons/video.png" alt="" class="icon"> Video</a>
-              <a class="btn btn-primary" href=""><img src="resource/icons/slides.png" alt="" class="icon"> Slides</a>
+              <a class="btn btn-primary" href="https://github.com/amirhertz/SAPE"><img src="resource/icons/code.png" alt="" class="icon"> Code</a>
+              <a class="btn btn-primary" href="https://youtu.be/aRWPSsDT9kk?t=4685"><img src="resource/icons/video.png" alt="" class="icon"> Video</a>
+              <a class="btn btn-primary" href="https://docs.google.com/presentation/d/1jgaWlZlaSNJ0wFfwEQUJFLj9kZARImBJ/edit?usp=sharing&ouid=105975300442884302709&rtpof=true&sd=true"><img src="resource/icons/slides.png" alt="" class="icon"> Slides</a>
           </div>
         </div>
     </div>
@@ -143,7 +143,7 @@
           <h2>Representation of 1D Signals</h2>
           <hr>
           <p>
-              With SAPE, neural nets can faithfully represent implicit 1D signals of varying frequency.<br>
+              With SAPE, multilayer-perceptrons can faithfully represent implicit 1D signals of varying frequency.<br>
               In the example below the network attempts to learn the representation of a 1D function represented by the <b> black </b> curve. 
               The training samples are shown in <b><font color="red"> red </font></b>.
           </p>
@@ -187,54 +187,131 @@
       </div>
     </div>
 
-<!--                 <div class="col-md-3 px-md-1">
-                  <h5> Training Samples </h5>
-                </div> 
-              <div class="row align-items-center mx-md-n1">
-                <div class="col-md-3 px-md-1">
-                    <img src="resource/2d/snow_target_masked.png" alt="" style="width:100%;">
-                  </div>
-              </div> -->
-
     <div class="container">
       <div class="section">
-          <h2>Regression of 2D images</h2>
+          <h2>Representation of 2D images</h2>
           <hr>
           <p>
-              SAPE is able to fit a wide range of natural images without tuning the positional encoding frequency scale. <br>
-              By sampling 25% of the original pixels in the image, SAPE is still able to reconstruct small details of the original signal. <br>
-              Note that SAPE's performance is capped by the sampling rate (e.g: details smaller than the sampling rate are not guaranteed to be captured) .
+              SAPE is able to represent a wide range of natural images without tuning the positional encoding frequency scale. <br>
+              By uniformly sampling 25% of the original pixels in the image as a train set, SAPE is still able to reconstruct small details of the original signal. 
+              Note that SAPE's performance is capped by the sampling rate (e.g: details smaller than the sampling rate are not guaranteed to be captured).
+              Below we show animations comparing the optimization progress per algorithm. For SAPE - we also show a heatmap tracking
+              the maximal frequency unmasked per position (<b><font color="blue">low</font></b> to <b><font color="red">high</font></b>).
+              Further below we compare the results after convergence.
           </p>
           <!-- <div class="row align-items-center"> -->
             <div class="container">
               <div class="row align-items-center mx-md-n1">
+                <div class="col-md-4 px-md-1"></div>
                 <div class="col-md-4 px-md-1">
+                  <div class="image-compare samples" style="width:100%;">
+                    <img src="resource/2d/snow_target_masked.png" alt="" class="preload">
+                    <img src="resource/2d/snow_target.png" alt="" class="preload">
+                  </div>
+                </div> 
+                <div class="col-md-4 px-md-1"></div>
+              </div>
+              <br>
+              <div class="row align-items-center mx-md-n1">
+                <div class="col-md-3 px-md-1">
                   <h5> MLP </h5>
                 </div>
-                <div class="col-md-4 px-md-1">
-                  <h5> Fourier Feature Networks </h5>
+                <div class="col-md-3 px-md-1">
+                  <h5> Fourier Feature Net. <i> σ=5</i> </h5> 
                 </div> 
-                <div class="col-md-4 px-md-1">
-                  <h5> SAPE </h5>
+                <div class="col-md-3 px-md-1">
+                  <h5> Fourier Feature Net. <i> σ=25</i> </h5>
                 </div> 
-              </div> 
+                <div class="col-md-3 px-md-1">
+                  <h5> SAPE <i> σ=25</i> </h5>
+                </div> 
+              </div>
               <div class="row align-items-center mx-md-n1">
-                <div class="col-md-4 px-md-1">
+                <div class="col-md-3 px-md-1">
+                  <!-- <img src="resource/2d/snow_no_encoding_no_control.gif" alt="" style="width:100%" class="preload"> -->
+                  <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
+                    <source src="resource/2d/snow_no_encoding_no_control.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="col-md-3 px-md-1">
+                  <!-- <img src="resource/2d/snow_ff_no_control_05.gif" alt="" style="width:100%" class="preload"> -->
+                  <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
+                    <source src="resource/2d/snow_ff_no_control_05.mp4" type="video/mp4">
+                  </video>
+                </div> 
+                <div class="col-md-3 px-md-1">
+                  <!-- <img src="resource/2d/snow_ff_no_control_25.gif" alt="" style="width:100%" class="preload"> -->
+                  <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
+                    <source src="resource/2d/snow_ff_no_control_25.mp4" type="video/mp4">
+                  </video>
+                </div> 
+                <div class="col-md-3 px-md-1">
+                  <!-- <div class="image-compare heatmap" style="width:100%;">
+                    <img src="resource/2d/snow_ff_spatial_progression_stashed_25.gif" alt="" class="preload">
+                    <img src="resource/2d/snow_ff_spatial_progression_stashed_heatmap.gif" alt="" class="preload">
+                  </div> -->
+                  <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
+                    <source src="resource/2d/snow_ff_spatial_progression_stashed_25.mp4" type="video/mp4">
+                  </video>
+                </div> 
+              </div>
+              <div class="row align-items-center mx-md-n1">
+                <div class="col-md-9 px-md-1"></div>
+                <div class="col-md-3 px-md-1">
+                  <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
+                    <source src="resource/2d/snow_ff_spatial_progression_stashed_heatmap.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+              <div class="row align-items-center mx-md-n1">
+                <div class="col-md-3 px-md-1">
                   <div class="image-compare" style="width:100%;">
-                    <img src="resource/2d/snow_no_encoding_no_control.gif" alt="">
+                    <img src="resource/2d/snow_no_encoding_no_control.png" alt="">
                     <img src="resource/2d/snow_target.png" alt="">
                   </div>
                 </div>
-                <div class="col-md-4 px-md-1">
+                <div class="col-md-3 px-md-1">
                   <div class="image-compare" style="width:100%;">
-                    <img src="resource/2d/snow_ff_no_control.gif" alt="">
+                    <img src="resource/2d/snow_ff_no_control_05.png" alt="">
                     <img src="resource/2d/snow_target.png" alt="">
                   </div>
                 </div> 
-                <div class="col-md-4 px-md-1">
+                <div class="col-md-3 px-md-1">
                   <div class="image-compare" style="width:100%;">
-                    <img src="resource/2d/snow_ff_spatial_progression_stashed.gif" alt="">
+                    <img src="resource/2d/snow_ff_no_control_25.png" alt="">
                     <img src="resource/2d/snow_target.png" alt="">
+                  </div>
+                </div> 
+                <div class="col-md-3 px-md-1">
+                  <div class="image-compare" style="width:100%;">
+                    <img src="resource/2d/snow_ff_spatial_progression_stashed_25.png" alt="">
+                    <img src="resource/2d/snow_target.png" alt="">
+                  </div>
+                </div> 
+              </div>
+              <div class="row align-items-center mx-md-n1" style="margin-top:7px;">
+                <div class="col-md-3 px-md-1">
+                  <div class="image-compare" style="width:100%;">
+                    <img src="resource/2d/ny_no_encoding_no_control.png" alt="">
+                    <img src="resource/2d/ny_target.png" alt="">
+                  </div>
+                </div>
+                <div class="col-md-3 px-md-1">
+                  <div class="image-compare" style="width:100%;">
+                    <img src="resource/2d/ny_ff_no_control_05.png" alt="">
+                    <img src="resource/2d/ny_target.png" alt="">
+                  </div>
+                </div> 
+                <div class="col-md-3 px-md-1">
+                  <div class="image-compare" style="width:100%;">
+                    <img src="resource/2d/ny_ff_no_control_25.png" alt="">
+                    <img src="resource/2d/ny_target.png" alt="">
+                  </div>
+                </div> 
+                <div class="col-md-3 px-md-1">
+                  <div class="image-compare" style="width:100%;">
+                    <img src="resource/2d/ny_ff_spatial_progression_stashed_25.png" alt="">
+                    <img src="resource/2d/ny_target.png" alt="">
                   </div>
                 </div> 
               </div> 
@@ -249,8 +326,9 @@
           <hr>
           <p>
               SAPE is also useful for learning the representation of 3d occupancy implicit functions. <br>
-              In the examples below, points were sampled uniformly in space and near the shape's surface. <br>
-              Note the result presented is a mesh converted from a neural implicit function using Marching Cubes.
+              In the examples below, points were sampled uniformly in space and near the shape surface. <br>
+              Points are then assigned a binary label to determine if they fall within the interior of the surface volume or not. <br>
+              Note that due to memory constraints, the result presented is a mesh converted from a neural implicit function using Marching Cubes with finite resolution.
           </p>
             <div class="container">
               <div class="row align-items-center mx-md-n1">
@@ -267,131 +345,44 @@
                   <h5> Ground Truth </h5>
                 </div> 
               </div> 
-<!-- 
               <div class="row align-items-center mx-md-n1">
                 <div class="col-md-3 px-md-1">
                   <model-viewer
                           alt="Statue"
-                          src="resource/glb/MalteseFalconSolid_final_no_encoding_no_control.glb"
+                          src="resource/glb/final_no_encoding_no_control_simp.glb"
                           style="width: 100%; height:300px; background-color: #404040"
-                          exposure="1.0"
-                          camera-orbit="0deg 150deg 105%"
+                          exposure=".8"
+                          camera-orbit="0deg 90deg 105%"
                           camera-controls>
                   </model-viewer>
                 </div>
                 <div class="col-md-3 px-md-1">
                   <model-viewer
                           alt="Statue"
-                          src="resource/glb/MalteseFalconSolid_final_ff_no_control.glb"
+                          src="resource/glb/final_ff_no_control_sin.glb"
                           style="width: 100%; height:300px; background-color: #404040"
                           exposure=".8"
-                          camera-orbit="0deg 150deg 105%"
+                          camera-orbit="0deg 90deg 50%"
                           camera-controls>
                   </model-viewer>
                 </div> 
                 <div class="col-md-3 px-md-1">
                   <model-viewer
                           alt="Statue"
-                          src="resource/glb/MalteseFalconSolid_final_ff_spatial_progression_stashed.glb"
+                          src="resource/glb/final_ff_spatial_progression_stashed_simp.glb"
                           style="width: 100%; height:300px; background-color: #404040"
                           exposure=".8"
-                          camera-orbit="0deg 150deg 105%"
+                          camera-orbit="0deg 90deg 200%"
                           camera-controls>
                   </model-viewer>
                 </div> 
                 <div class="col-md-3 px-md-1">
                   <model-viewer
                           alt="Statue"
-                          src="resource/glb/MalteseFalconSolid_gt.glb"
+                          src="resource/glb/statue.glb"
                           style="width: 100%; height:300px; background-color: #404040"
-                          exposure=".8"
-                          camera-orbit="0deg 150deg 105%"
-                          camera-controls>
-                  </model-viewer>
-                </div> 
-              </div> 
-              <br> -->
-              <div class="row align-items-center mx-md-n1">
-                <div class="col-md-3 px-md-1">
-                  <model-viewer
-                          alt="Statue"
-                          src="resource/glb/Slic3r_friendly_pt5_scale_tilted_final_no_encoding_no_control.glb"
-                          style="width: 100%; height:300px; background-color: #404040"
-                          exposure="1.0"
-                          camera-orbit="0deg 150deg 105%"
-                          camera-controls>
-                  </model-viewer>
-                </div>
-                <div class="col-md-3 px-md-1">
-                  <model-viewer
-                          alt="Statue"
-                          src="resource/glb/Slic3r_friendly_pt5_scale_tilted_final_ff_no_control.glb"
-                          style="width: 100%; height:300px; background-color: #404040"
-                          exposure=".8"
-                          camera-orbit="0deg 150deg 105%"
-                          camera-controls>
-                  </model-viewer>
-                </div> 
-                <div class="col-md-3 px-md-1">
-                  <model-viewer
-                          alt="Statue"
-                          src="resource/glb/Slic3r_friendly_pt5_scale_tilted_final_ff_spatial_progression_stashed.glb"
-                          style="width: 100%; height:300px; background-color: #404040"
-                          exposure=".8"
-                          camera-orbit="0deg 150deg 105%"
-                          camera-controls>
-                  </model-viewer>
-                </div> 
-                <div class="col-md-3 px-md-1">
-                  <model-viewer
-                          alt="Statue"
-                          src="resource/glb/Slic3r_friendly_pt5_scale_tilted_gt.glb"
-                          style="width: 100%; height:300px; background-color: #404040"
-                          exposure=".8"
-                          camera-orbit="0deg 150deg 105%"
-                          camera-controls>
-                  </model-viewer>
-                </div> 
-              </div> 
-              <br>
-              <div class="row align-items-center mx-md-n1">
-                <div class="col-md-3 px-md-1">
-                  <model-viewer
-                          alt="Statue"
-                          src="resource/glb/wave2_final_no_encoding_no_control.glb"
-                          style="width: 100%; height:300px; background-color: #404040"
-                          exposure="1.0"
-                          camera-orbit="0deg 150deg 105%"
-                          camera-controls>
-                  </model-viewer>
-                </div>
-                <div class="col-md-3 px-md-1">
-                  <model-viewer
-                          alt="Statue"
-                          src="resource/glb/wave2_final_ff_no_control.glb"
-                          style="width: 100%; height:300px; background-color: #404040"
-                          exposure=".8"
-                          camera-orbit="0deg 150deg 105%"
-                          camera-controls>
-                  </model-viewer>
-                </div> 
-                <div class="col-md-3 px-md-1">
-                  <model-viewer
-                          alt="Statue"
-                          src="resource/glb/wave2_final_ff_spatial_progression_stashed.glb"
-                          style="width: 100%; height:300px; background-color: #404040"
-                          exposure=".8"
-                          camera-orbit="0deg 150deg 105%"
-                          camera-controls>
-                  </model-viewer>
-                </div> 
-                <div class="col-md-3 px-md-1">
-                  <model-viewer
-                          alt="Statue"
-                          src="resource/glb/wave2_gt.glb"
-                          style="width: 100%; height:300px; background-color: #404040"
-                          exposure=".8"
-                          camera-orbit="0deg 150deg 105%"
+                          exposure="1.2"
+                          camera-orbit="0deg 90deg 200%"
                           camera-controls>
                   </model-viewer>
                 </div> 
@@ -406,23 +397,60 @@
           <h2>Deformation of 2D Silhouettes</h2>
           <hr>
           <p>
-              In the following task, SAPE is pretrained to output the coordinates of a unit circle. <br>
-              The network is then optimized to trace the boundaries of a target shape.
+              Finally, we demonstrate how SAPE can regularize a deformation process.
+              In the following task, for all shapes, SAPE is first pretrained to output the coordinates of a unit circle.
+              Then, the network is then optimized to trace the boundaries of a target shape by learning the <i> offset </i> from the circle boundary to the shape contour, per position. <br>
+              The progressive nature of SAPE allows it to capture the global shape first, during the early steps when <i>Spectral Bias</i> is present and
+              the optimization is stable. As higher frequencies are revealed, SAPE is able to fit the finer details of the target shape. <br>
           </p>
         <div class="row align-items-center mx-md-n1">
+          <div class="col-md-5 px-md-1"></div>
+          <div class="col-md-2 px-md-1"> <img src="resource/gif/deform_example.png" alt="" style="width: 100%;"> </div> 
+          <div class="col-md-5 px-md-1"></div>
+        </div>
+        <br>
+        <div class="row align-items-center mx-md-n1">
           <div class="col-md-3 px-md-1">
-            <img src="resource/fig/sape_animation1.gif" alt="" class="icon" style="width:100%">
+            <h5> MLP </h5>
           </div>
           <div class="col-md-3 px-md-1">
-            <img src="resource/fig/sape_animation2.gif" alt="" class="icon" style="width:100%">
+            <h5> Fourier Feature Networks </h5> 
           </div> 
           <div class="col-md-3 px-md-1">
-            <img src="resource/fig/sape_animation3.gif" alt="" class="icon" style="width:100%">
+            <h5> SAPE </h5>
           </div> 
           <div class="col-md-3 px-md-1">
-            <img src="resource/fig/sape_animation4.gif" alt="" class="icon" style="width:100%">
+            <h5> Target Shape </h5>
           </div> 
-        </div> 
+        </div>
+        <div class="row align-items-center mx-md-n1">
+          <div class="col-md-3 px-md-1">
+            <img src="resource/gif/denver_no_encoding_no_control.gif" alt="" style="width:100%" class="preload">
+          </div>
+          <div class="col-md-3 px-md-1">
+            <img src="resource/gif/denver_ff_no_control.gif" alt="" style="width:100%" class="preload">
+          </div> 
+          <div class="col-md-3 px-md-1">
+            <img src="resource/gif/denver_ff_spatial_progression_stashed.gif" alt="" style="width:100%" class="preload">
+          </div> 
+          <div class="col-md-3 px-md-1">
+            <img src="resource/gif/denver_target.png" alt="" style="width:100%" class="preload">
+          </div> 
+        </div>
+        <div class="row align-items-center mx-md-n1">
+          <div class="col-md-3 px-md-1">
+            <img src="resource/gif/tree_no_encoding_no_control.gif" alt="" style="width:100%" class="preload">
+          </div>
+          <div class="col-md-3 px-md-1">
+            <img src="resource/gif/tree_ff_no_control.gif" alt="" style="width:100%" class="preload">
+          </div> 
+          <div class="col-md-3 px-md-1">
+            <img src="resource/gif/tree_ff_spatial_progression_stashed.gif" alt="" style="width:100%" class="preload">
+          </div> 
+          <div class="col-md-3 px-md-1">
+            <img src="resource/gif/tree_target.png" alt="" style="width:100%" class="preload">
+          </div> 
+        </div>        
       </div> 
     </div> 
 
@@ -430,27 +458,61 @@
       <div class="section">
         <h2>Related Works</h2>
         <hr>
-        <div class="row align-items-center mx-md-n1">
+        <div class="row align-items-start mx-md-n1">
           <div class="col-md-6 px-md-1">
-            <p>
-              <h3>Baselines</h3>
-              <ol>
-                <li>Fourier Feature Networks</li>
-                <li>SIREN</li>
-                <li>Spectral Bias of Neural Networks</li>
-              </ol>
-            </p>
+              <p><h3>Baselines</h3></p>
           </div>
           <div class="col-md-6 px-md-1">
-            <p>
-                <h3>Concurrent Works</h3>
-                <ol>
-                  <li>Modulated SIREN</li>
-                  <li>Nerfies</li>
-                  <li>BARF</li>
-                </ol>
-            </p>
-          </div> 
+              <p><h3>Concurrent Works</h3></p>
+          </div>
+        </div>
+        <div class="row align-items-start mx-md-n1">
+          <div class="col-md-6 px-md-1">
+              <ul>
+                <li>
+                  <a href="https://arxiv.org/abs/1806.08734"> Rahaman et al. (2019) </a> observed that deep ReLU networks are biased towards low frequency functions, and identified this phenomenon as "Spectral Bias".
+                </li>
+              </ul>
+          </div>
+          <div class="col-md-6 px-md-1">
+              <ul>
+                <li> 
+                  <a href="https://nerfies.github.io/">Park et al. (2021)</a> reconstruct photorealistic non-rigid deforming scenes from photos or videos. They also use coarse-to-fine positional encoding.
+                </li>
+              </ul>
+          </div>
+        </div>
+        <div class="row align-items-start mx-md-n1">
+          <div class="col-md-6 px-md-1">
+              <ul>
+                <li> 
+                  <a href="https://bmild.github.io/fourfeat/"> Tancik et al. (2020) </a> established the groundwork for applying Fourier Feature mappings to MLPs. They provided extensive analysis of results through the lens of NTK theory.
+                </li>
+              </ul>
+          </div>
+          <div class="col-md-6 px-md-1">
+              <ul>
+                <li> 
+                    <a href="https://chenhsuanlin.bitbucket.io/bundle-adjusting-NeRF/"> Lin et al. (2021) </a> extend Neural Radiance Fields (NeRF), for training without accurate camera poses. They too, apply coarse-to-fine registration on coordinate based scene-representations.
+                </li>
+              </ul>
+          </div>
+        </div>
+        <div class="row align-items-start mx-md-n1">
+          <div class="col-md-6 px-md-1">
+              <ul>
+                <li>
+                  <a href="https://vsitzmann.github.io/siren/"> Sitzmann et al. (2020) </a> proposed the sinusoidal representation networks (SIREN). Unlike other works which focus on positional encoding mapping of the network input, they use sine functions as non-linear activations for all layers of the network.
+                </li>
+              </ul>
+          </div>
+          <div class="col-md-6 px-md-1">
+              <ul>
+                <li> 
+                  <a href="https://ishit.github.io/modsine/">Mehta et al. (2021)</a> generalize SIREN with a dual-MLP architecture, where an auxilary network maps input latent codes to parameters that modulate the periodic activations of the synthesis network.
+                </li>
+              </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -470,6 +532,33 @@
       </div>
     </div>
 
+    <div class="container">
+      <div class="section">
+        <div class="row align-items-center mx-md-n1">
+          <div class="col-md-3 px-md-1">
+            <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
+              <source src="resource/fig/sape_animation1.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="col-md-3 px-md-1">
+            <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
+              <source src="resource/fig/sape_animation2.mp4" type="video/mp4">
+            </video>
+          </div> 
+          <div class="col-md-3 px-md-1">
+            <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
+              <source src="resource/fig/sape_animation3.mp4" type="video/mp4">
+            </video>
+          </div> 
+          <div class="col-md-3 px-md-1">
+            <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
+              <source src="resource/fig/sape_animation4.mp4" type="video/mp4">
+            </video>
+          </div> 
+        </div> 
+      </div>
+    </div>
+
     <br><br>
 
     <!-- ------------- -->
@@ -485,7 +574,9 @@
 
         let imageCompareViewers = document.querySelectorAll("div.image-compare");
 
-        let config = {
+        imageCompareViewers.forEach((element, i) => {
+
+          let config = {
             controlColor: "#eeeeee",
             controlShadow: false,
             startingPoint: 50,
@@ -494,11 +585,19 @@
             labelOptions: {
               before: "Output",
               after: "Ground Truth",
-              onHover: false, // default
+              onHover: true
             },
           }
+          
+          if (element.classList.contains("heatmap")) {
+              config.labelOptions.after = "Max Freq."
+          }
+          else if (element.classList.contains("samples")) {
+              config.labelOptions.before = "Train Set";
+              config.labelOptions.after = "Ground Truth";
+              config.labelOptions.onHover = false; // default
+          }
 
-        imageCompareViewers.forEach((element, i) => {
           new ImageCompare(element, config).mount();
         });
       </script>
@@ -658,6 +757,14 @@
         centerMode: true
       });
 
+    </script>
+
+    <script type="text/javascript">
+      $(window).on('load', function() {
+          $('.preload').attr('src', function(i,a){
+              $(this).attr('src','').removeClass('preload').attr('src',a);
+          });
+      });
     </script>
 
   </body>
