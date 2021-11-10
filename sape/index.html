@@ -52,23 +52,25 @@
               <a class="btn btn-primary" href="https://docs.google.com/presentation/d/1jgaWlZlaSNJ0wFfwEQUJFLj9kZARImBJ/edit?usp=sharing&ouid=105975300442884302709&rtpof=true&sd=true"><img src="resource/icons/slides.png" alt="" class="icon"> Slides</a>
           </div>
         </div>
+
+        <div class="d-lg-none"> <br> <i> -Note: This page is best viewed on large screens- </i> </div>
     </div>
 
     <div class="container">
       <div class="section">
         <h2>What is SAPE about?</h2>  
 
-        <div class="box">
+        <div class="box d-none d-lg-block">
           <div class="slider-nav">
             <div class="slide-btn">
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-4">
                   <div class="rectangle rounded">
                     <h5>Spectral Bias</h5>
                     When used to fit neural implicit functions, Multilayer Perceptrons are likely to learn the global, lower frequencies of signals earlier. At the same time, they struggle to fit local, high frequencies. This phenomenon was termed by <a href="https://arxiv.org/abs/1806.08734">Rahaman et al. 2019 </a> as "Spectral Bias".
                   </div>
                 </div>
-                <div class="col-md-6 photo">
+                <div class="col-6 photo">
                   <span>
                     <img src="resource/fig/mlp.png" alt="...">
                   </span>
@@ -78,14 +80,14 @@
 
             <div class="slide-btn">
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-4">
                   <div class="rectangle rounded">
                     <h5>Positional Encoding</h5>
                     One way to overcome "Spectral Bias" is by mapping input coordinates to a higher dimensional space via <a href="https://arxiv.org/abs/2006.10739">"Positional Encoding"</a>.
                     Doing so, however, generally requires manually tuning the scale of the encoding frequency band.
                   </div>
                 </div>
-                <div class="col-md-6 photo">
+                <div class="col-6 photo">
                   <span>
                     <img src="resource/fig/pe_siren.png" alt="...">
                   </span>
@@ -95,13 +97,13 @@
 
             <div class="slide-btn">
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-4">
                   <div class="rectangle rounded">
                     <h5>Progressive Positional Encoding</h5>
                     SAPE avoids manual tuning by employing a simple policy of progressively revealing the positional encoding to the network.
                   </div>
                 </div>
-                <div class="col-md-6 photo">
+                <div class="col-6 photo">
                   <span>
                     <img src="resource/fig/progressive.png" alt="...">
                   </span>
@@ -111,7 +113,7 @@
 
             <div class="slide-btn">
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-4">
                   <div class="rectangle rounded">
                     <h5>Spatially Adaptive Progression</h5>
                     In addition, SAPE maintains a record of progression per portion of the neural implicit signal.
@@ -119,7 +121,7 @@
                     As a result, SAPE is able to learn high quality neural implicit functions with minimal manual intervention.
                   </div>
                 </div>
-                <div class="col-md-6 photo">
+                <div class="col-6 photo">
                   <span>
                     <img src="resource/fig/spatially_adaptive.png" alt="...">
                   </span>
@@ -151,34 +153,24 @@
               <div class="row align-items-center mx-md-n1">
                 <div class="col-md-3 px-md-1">
                   <h5> MLP </h5>
-                </div>
-                <div class="col-md-3 px-md-1">
-                  <h5> Fourier Feature Networks </h5>
-                </div> 
-                <div class="col-md-3 px-md-1">
-                  <h5> SAPE </h5>
-                </div> 
-                <div class="col-md-3 px-md-1">
-                  <h5> Ground Truth </h5>
-                </div> 
-              </div> 
-              <div class="row align-items-center mx-md-n1">
-                <div class="col-md-3 px-md-1">
                   <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
                     <source src="resource/1d/no_encoding_no_control.mp4" type="video/mp4">
                   </video>
                 </div>
                 <div class="col-md-3 px-md-1">
+                  <h5> Fourier Feature Networks </h5>
                   <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
                     <source src="resource/1d/ff_no_control.mp4" type="video/mp4">
                   </video>
                 </div> 
                 <div class="col-md-3 px-md-1">
+                  <h5> SAPE </h5>
                   <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
                     <source src="resource/1d/ff_spatial_progression_stashed.mp4" type="video/mp4">
                   </video>
                 </div> 
                 <div class="col-md-3 px-md-1">
+                  <h5> Ground Truth </h5>
                   <img src="resource/1d/target.png" alt="1D Target" style="width:100%;">
                 </div> 
               </div> 
@@ -195,11 +187,9 @@
               SAPE is able to represent a wide range of natural images without tuning the positional encoding frequency scale. <br>
               By uniformly sampling 25% of the original pixels in the image as a train set, SAPE is still able to reconstruct small details of the original signal. 
               Note that SAPE's performance is capped by the sampling rate (e.g: details smaller than the sampling rate are not guaranteed to be captured).
-              Below we show animations comparing the optimization progress per algorithm. For SAPE - we also show a heatmap tracking
-              the maximal frequency unmasked per position (<b><font color="blue">low</font></b> to <b><font color="red">high</font></b>).
+              Below we show animations comparing the optimization progress per algorithm. For SAPE - you may hover over the animation to toggle a heatmap tracking the maximal frequency unmasked per position (<b><font color="blue">low</font></b> to <b><font color="red">high</font></b>).
               Further below we compare the results after convergence.
           </p>
-          <!-- <div class="row align-items-center"> -->
             <div class="container">
               <div class="row align-items-center mx-md-n1">
                 <div class="col-md-4 px-md-1"></div>
@@ -214,107 +204,114 @@
               <br>
               <div class="row align-items-center mx-md-n1">
                 <div class="col-md-3 px-md-1">
-                  <h5> MLP </h5>
+                  <div class="row" style="margin-top:17px;">
+                    <div class="col">
+                      <h5> MLP </h5>
+                      <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
+                        <source src="resource/2d/snow_no_encoding_no_control.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top:7px;">
+                    <div class="col">
+                      <div class="image-compare" style="width:100%;">
+                        <img src="resource/2d/snow_no_encoding_no_control.png" alt="">
+                        <img src="resource/2d/snow_target.png" alt="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top:7px;">
+                    <div class="col">
+                      <div class="image-compare" style="width:100%;">
+                        <img src="resource/2d/ny_no_encoding_no_control.png" alt="">
+                        <img src="resource/2d/ny_target.png" alt="">
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="col-md-3 px-md-1">
-                  <h5> Fourier Feature Net. <i> σ=5</i> </h5> 
+                  <div class="row" style="margin-top:17px;">
+                    <div class="col">
+                      <h5> Fourier Feature Net. <i> σ=5</i> </h5> 
+                      <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
+                        <source src="resource/2d/snow_ff_no_control_05.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top:7px;">
+                    <div class="col">
+                      <div class="image-compare" style="width:100%;">
+                        <img src="resource/2d/snow_ff_no_control_05.png" alt="">
+                        <img src="resource/2d/snow_target.png" alt="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top:7px;">
+                    <div class="col">
+                      <div class="image-compare" style="width:100%;">
+                        <img src="resource/2d/ny_ff_no_control_05.png" alt="">
+                        <img src="resource/2d/ny_target.png" alt="">
+                      </div>
+                    </div>
+                  </div>
                 </div> 
                 <div class="col-md-3 px-md-1">
-                  <h5> Fourier Feature Net. <i> σ=25</i> </h5>
+                  <div class="row" style="margin-top:17px;">
+                    <div class="col">
+                      <h5> Fourier Feature Net. <i> σ=25</i> </h5>
+                      <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="" id="vid-swap-calib">
+                        <source src="resource/2d/snow_ff_no_control_25.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top:7px;">
+                    <div class="col">
+                      <div class="image-compare" style="width:100%;">
+                        <img src="resource/2d/snow_ff_no_control_25.png" alt="">
+                        <img src="resource/2d/snow_target.png" alt="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top:7px;">
+                    <div class="col">
+                      <div class="image-compare" style="width:100%;">
+                        <img src="resource/2d/ny_ff_no_control_25.png" alt="">
+                        <img src="resource/2d/ny_target.png" alt="">
+                      </div>
+                    </div>
+                  </div>
                 </div> 
                 <div class="col-md-3 px-md-1">
-                  <h5> SAPE <i> σ=25</i> </h5>
-                </div> 
+                  <div class="row" style="margin-top:17px;">
+                      <div class="col">
+                      <h5> SAPE <i> σ=25</i> </h5>
+                      <div class='video-container' style="position: relative;">
+                        <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="" id="vid-swap-in" style="position: absolute;">
+                          <source src="resource/2d/snow_ff_spatial_progression_stashed_25.mp4" type="video/mp4">
+                        </video>
+                        <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="" id="vid-swap-out" >
+                          <source src="resource/2d/snow_ff_spatial_progression_stashed_heatmap.mp4" type="video/mp4">
+                        </video>
+                      </div>
+                    </div>
+                  </div> 
+                  <div class="row" style="margin-top:7px;">
+                    <div class="col">
+                      <div class="image-compare" style="width:100%;">
+                        <img src="resource/2d/snow_ff_spatial_progression_stashed_25.png" alt="">
+                        <img src="resource/2d/snow_target.png" alt="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top:7px;">
+                    <div class="col">
+                      <div class="image-compare" style="width:100%;">
+                        <img src="resource/2d/ny_ff_spatial_progression_stashed_25.png" alt="">
+                        <img src="resource/2d/ny_target.png" alt="">
+                      </div>
+                    </div>
+                  </div>
               </div>
-              <div class="row align-items-center mx-md-n1">
-                <div class="col-md-3 px-md-1">
-                  <!-- <img src="resource/2d/snow_no_encoding_no_control.gif" alt="" style="width:100%" class="preload"> -->
-                  <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
-                    <source src="resource/2d/snow_no_encoding_no_control.mp4" type="video/mp4">
-                  </video>
-                </div>
-                <div class="col-md-3 px-md-1">
-                  <!-- <img src="resource/2d/snow_ff_no_control_05.gif" alt="" style="width:100%" class="preload"> -->
-                  <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
-                    <source src="resource/2d/snow_ff_no_control_05.mp4" type="video/mp4">
-                  </video>
-                </div> 
-                <div class="col-md-3 px-md-1">
-                  <!-- <img src="resource/2d/snow_ff_no_control_25.gif" alt="" style="width:100%" class="preload"> -->
-                  <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
-                    <source src="resource/2d/snow_ff_no_control_25.mp4" type="video/mp4">
-                  </video>
-                </div> 
-                <div class="col-md-3 px-md-1">
-                  <!-- <div class="image-compare heatmap" style="width:100%;">
-                    <img src="resource/2d/snow_ff_spatial_progression_stashed_25.gif" alt="" class="preload">
-                    <img src="resource/2d/snow_ff_spatial_progression_stashed_heatmap.gif" alt="" class="preload">
-                  </div> -->
-                  <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
-                    <source src="resource/2d/snow_ff_spatial_progression_stashed_25.mp4" type="video/mp4">
-                  </video>
-                </div> 
-              </div>
-              <div class="row align-items-center mx-md-n1">
-                <div class="col-md-9 px-md-1"></div>
-                <div class="col-md-3 px-md-1">
-                  <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
-                    <source src="resource/2d/snow_ff_spatial_progression_stashed_heatmap.mp4" type="video/mp4">
-                  </video>
-                </div>
-              </div>
-              <div class="row align-items-center mx-md-n1">
-                <div class="col-md-3 px-md-1">
-                  <div class="image-compare" style="width:100%;">
-                    <img src="resource/2d/snow_no_encoding_no_control.png" alt="">
-                    <img src="resource/2d/snow_target.png" alt="">
-                  </div>
-                </div>
-                <div class="col-md-3 px-md-1">
-                  <div class="image-compare" style="width:100%;">
-                    <img src="resource/2d/snow_ff_no_control_05.png" alt="">
-                    <img src="resource/2d/snow_target.png" alt="">
-                  </div>
-                </div> 
-                <div class="col-md-3 px-md-1">
-                  <div class="image-compare" style="width:100%;">
-                    <img src="resource/2d/snow_ff_no_control_25.png" alt="">
-                    <img src="resource/2d/snow_target.png" alt="">
-                  </div>
-                </div> 
-                <div class="col-md-3 px-md-1">
-                  <div class="image-compare" style="width:100%;">
-                    <img src="resource/2d/snow_ff_spatial_progression_stashed_25.png" alt="">
-                    <img src="resource/2d/snow_target.png" alt="">
-                  </div>
-                </div> 
-              </div>
-              <div class="row align-items-center mx-md-n1" style="margin-top:7px;">
-                <div class="col-md-3 px-md-1">
-                  <div class="image-compare" style="width:100%;">
-                    <img src="resource/2d/ny_no_encoding_no_control.png" alt="">
-                    <img src="resource/2d/ny_target.png" alt="">
-                  </div>
-                </div>
-                <div class="col-md-3 px-md-1">
-                  <div class="image-compare" style="width:100%;">
-                    <img src="resource/2d/ny_ff_no_control_05.png" alt="">
-                    <img src="resource/2d/ny_target.png" alt="">
-                  </div>
-                </div> 
-                <div class="col-md-3 px-md-1">
-                  <div class="image-compare" style="width:100%;">
-                    <img src="resource/2d/ny_ff_no_control_25.png" alt="">
-                    <img src="resource/2d/ny_target.png" alt="">
-                  </div>
-                </div> 
-                <div class="col-md-3 px-md-1">
-                  <div class="image-compare" style="width:100%;">
-                    <img src="resource/2d/ny_ff_spatial_progression_stashed_25.png" alt="">
-                    <img src="resource/2d/ny_target.png" alt="">
-                  </div>
-                </div> 
-              </div> 
             </div>
           </div>
       </div>
@@ -332,21 +329,8 @@
           </p>
             <div class="container">
               <div class="row align-items-center mx-md-n1">
-                <div class="col-md-3 px-md-1">
+                <div class="col-md-3 px-md-1" style="margin-top:17px;">
                   <h5> MLP </h5>
-                </div>
-                <div class="col-md-3 px-md-1">
-                  <h5> Fourier Feature Networks </h5>
-                </div> 
-                <div class="col-md-3 px-md-1">
-                  <h5> SAPE </h5>
-                </div> 
-                <div class="col-md-3 px-md-1">
-                  <h5> Ground Truth </h5>
-                </div> 
-              </div> 
-              <div class="row align-items-center mx-md-n1">
-                <div class="col-md-3 px-md-1">
                   <model-viewer
                           alt="Statue"
                           src="resource/glb/final_no_encoding_no_control_simp.glb"
@@ -356,7 +340,8 @@
                           camera-controls>
                   </model-viewer>
                 </div>
-                <div class="col-md-3 px-md-1">
+                <div class="col-md-3 px-md-1" style="margin-top:17px;">
+                  <h5> Fourier Feature Networks </h5>
                   <model-viewer
                           alt="Statue"
                           src="resource/glb/final_ff_no_control_sin.glb"
@@ -366,7 +351,8 @@
                           camera-controls>
                   </model-viewer>
                 </div> 
-                <div class="col-md-3 px-md-1">
+                <div class="col-md-3 px-md-1" style="margin-top:17px;">
+                  <h5> SAPE </h5>
                   <model-viewer
                           alt="Statue"
                           src="resource/glb/final_ff_spatial_progression_stashed_simp.glb"
@@ -376,7 +362,8 @@
                           camera-controls>
                   </model-viewer>
                 </div> 
-                <div class="col-md-3 px-md-1">
+                <div class="col-md-3 px-md-1" style="margin-top:17px;">
+                  <h5> Ground Truth </h5>
                   <model-viewer
                           alt="Statue"
                           src="resource/glb/statue.glb"
@@ -404,53 +391,65 @@
               the optimization is stable. As higher frequencies are revealed, SAPE is able to fit the finer details of the target shape. <br>
           </p>
         <div class="row align-items-center mx-md-n1">
-          <div class="col-md-5 px-md-1"></div>
-          <div class="col-md-2 px-md-1"> <img src="resource/gif/deform_example.png" alt="" style="width: 100%;"> </div> 
-          <div class="col-md-5 px-md-1"></div>
+          <div class="col-4 px-md-1"></div>
+          <div class="col-4 px-md-1"> <img src="resource/gif/deform_example.png" alt="" style="width: 100%;"> </div> 
+          <div class="col-4 px-md-1"></div>
         </div>
         <br>
         <div class="row align-items-center mx-md-n1">
-          <div class="col-md-3 px-md-1">
-            <h5> MLP </h5>
+          <div class="col-3 px-md-1">
+            <div class="row" style="margin-top:7px;">
+              <div class="col">
+                <h5> MLP </h5>
+                <img src="resource/gif/denver_no_encoding_no_control.gif" alt="" style="width:100%" class="preload">
+              </div>
+            </div>
+            <div class="row" style="margin-top:7px;">
+              <div class="col">
+                <img src="resource/gif/tree_no_encoding_no_control.gif" alt="" style="width:100%" class="preload">
+              </div>
+            </div>
           </div>
-          <div class="col-md-3 px-md-1">
-            <h5> Fourier Feature Networks </h5> 
+          <div class="col-3 px-md-1">
+            <div class="row" style="margin-top:7px;">
+              <div class="col">
+                <h5> Fourier Feature Networks </h5>
+                <img src="resource/gif/denver_ff_no_control.gif" alt="" style="width:100%" class="preload">
+              </div>
+            </div>
+            <div class="row" style="margin-top:7px;">
+              <div class="col">
+                <img src="resource/gif/tree_ff_no_control.gif" alt="" style="width:100%" class="preload">
+              </div>
+            </div>
           </div> 
-          <div class="col-md-3 px-md-1">
-            <h5> SAPE </h5>
+          <div class="col-3 px-md-1">
+            <div class="row" style="margin-top:7px;">
+              <div class="col">
+                <h5> SAPE </h5>
+                <img src="resource/gif/denver_ff_spatial_progression_stashed.gif" alt="" style="width:100%" class="preload">
+              </div>
+            </div>
+            <div class="row" style="margin-top:7px;">
+              <div class="col">
+                <img src="resource/gif/tree_ff_spatial_progression_stashed.gif" alt="" style="width:100%" class="preload">
+              </div>
+            </div>
           </div> 
-          <div class="col-md-3 px-md-1">
-            <h5> Target Shape </h5>
+          <div class="col-3 px-md-1">
+            <div class="row" style="margin-top:7px;">
+              <div class="col">
+                <h5> Target Shape </h5>
+                <img src="resource/gif/denver_target.png" alt="" style="width:100%" class="preload">
+              </div>
+            </div>
+            <div class="row" style="margin-top:7px;">
+              <div class="col">
+                <img src="resource/gif/tree_target.png" alt="" style="width:100%" class="preload">
+              </div>
+            </div>
           </div> 
-        </div>
-        <div class="row align-items-center mx-md-n1">
-          <div class="col-md-3 px-md-1">
-            <img src="resource/gif/denver_no_encoding_no_control.gif" alt="" style="width:100%" class="preload">
-          </div>
-          <div class="col-md-3 px-md-1">
-            <img src="resource/gif/denver_ff_no_control.gif" alt="" style="width:100%" class="preload">
-          </div> 
-          <div class="col-md-3 px-md-1">
-            <img src="resource/gif/denver_ff_spatial_progression_stashed.gif" alt="" style="width:100%" class="preload">
-          </div> 
-          <div class="col-md-3 px-md-1">
-            <img src="resource/gif/denver_target.png" alt="" style="width:100%" class="preload">
-          </div> 
-        </div>
-        <div class="row align-items-center mx-md-n1">
-          <div class="col-md-3 px-md-1">
-            <img src="resource/gif/tree_no_encoding_no_control.gif" alt="" style="width:100%" class="preload">
-          </div>
-          <div class="col-md-3 px-md-1">
-            <img src="resource/gif/tree_ff_no_control.gif" alt="" style="width:100%" class="preload">
-          </div> 
-          <div class="col-md-3 px-md-1">
-            <img src="resource/gif/tree_ff_spatial_progression_stashed.gif" alt="" style="width:100%" class="preload">
-          </div> 
-          <div class="col-md-3 px-md-1">
-            <img src="resource/gif/tree_target.png" alt="" style="width:100%" class="preload">
-          </div> 
-        </div>        
+        </div>     
       </div> 
     </div> 
 
@@ -460,58 +459,49 @@
         <hr>
         <div class="row align-items-start mx-md-n1">
           <div class="col-md-6 px-md-1">
-              <p><h3>Baselines</h3></p>
+            <div class="row" style="margin-top:7px;">
+              <div class="col">
+                <p><h3>Baselines</h3></p>
+              </div>
+            </div>
+            <div class="row" style="margin-top:7px;">
+              <div class="col">     
+                <ul>
+                  <li>
+                    <a href="https://arxiv.org/abs/1806.08734"> Rahaman et al. (2019) </a> observed that deep ReLU networks are biased towards low frequency functions, and identified this phenomenon as "Spectral Bias".
+                  </li>
+                  <li> 
+                    <a href="https://bmild.github.io/fourfeat/"> Tancik et al. (2020) </a> established the groundwork for applying Fourier Feature mappings to MLPs. They provided extensive analysis of results through the lens of NTK theory.
+                  </li>
+                  <li>
+                    <a href="https://vsitzmann.github.io/siren/"> Sitzmann et al. (2020) </a> proposed the sinusoidal representation networks (SIREN). Unlike other works which focus on positional encoding mapping of the network input, they use sine functions as non-linear activations for all layers of the network.
+                  </li>                  
+                </ul>       
+              </div>
+            </div>
           </div>
           <div class="col-md-6 px-md-1">
-              <p><h3>Concurrent Works</h3></p>
-          </div>
-        </div>
-        <div class="row align-items-start mx-md-n1">
-          <div class="col-md-6 px-md-1">
-              <ul>
-                <li>
-                  <a href="https://arxiv.org/abs/1806.08734"> Rahaman et al. (2019) </a> observed that deep ReLU networks are biased towards low frequency functions, and identified this phenomenon as "Spectral Bias".
-                </li>
-              </ul>
-          </div>
-          <div class="col-md-6 px-md-1">
-              <ul>
-                <li> 
-                  <a href="https://nerfies.github.io/">Park et al. (2021)</a> reconstruct photorealistic non-rigid deforming scenes from photos or videos. They also use coarse-to-fine positional encoding.
-                </li>
-              </ul>
-          </div>
-        </div>
-        <div class="row align-items-start mx-md-n1">
-          <div class="col-md-6 px-md-1">
-              <ul>
-                <li> 
-                  <a href="https://bmild.github.io/fourfeat/"> Tancik et al. (2020) </a> established the groundwork for applying Fourier Feature mappings to MLPs. They provided extensive analysis of results through the lens of NTK theory.
-                </li>
-              </ul>
-          </div>
-          <div class="col-md-6 px-md-1">
-              <ul>
-                <li> 
-                    <a href="https://chenhsuanlin.bitbucket.io/bundle-adjusting-NeRF/"> Lin et al. (2021) </a> extend Neural Radiance Fields (NeRF), for training without accurate camera poses. They too, apply coarse-to-fine registration on coordinate based scene-representations.
-                </li>
-              </ul>
-          </div>
-        </div>
-        <div class="row align-items-start mx-md-n1">
-          <div class="col-md-6 px-md-1">
-              <ul>
-                <li>
-                  <a href="https://vsitzmann.github.io/siren/"> Sitzmann et al. (2020) </a> proposed the sinusoidal representation networks (SIREN). Unlike other works which focus on positional encoding mapping of the network input, they use sine functions as non-linear activations for all layers of the network.
-                </li>
-              </ul>
-          </div>
-          <div class="col-md-6 px-md-1">
-              <ul>
-                <li> 
-                  <a href="https://ishit.github.io/modsine/">Mehta et al. (2021)</a> generalize SIREN with a dual-MLP architecture, where an auxilary network maps input latent codes to parameters that modulate the periodic activations of the synthesis network.
-                </li>
-              </ul>
+            <div class="row" style="margin-top:7px;">
+              <div class="col">         
+                <p><h3>Concurrent Works</h3></p>   
+              </div>
+            </div>
+
+            <div class="row" style="margin-top:7px;">
+              <div class="col">      
+                <ul>
+                  <li> 
+                    <a href="https://nerfies.github.io/">Park et al. (2021)</a> reconstruct photorealistic non-rigid deforming scenes from photos or videos. They also use coarse-to-fine positional encoding.
+                  </li>
+                  <li> 
+                      <a href="https://chenhsuanlin.bitbucket.io/bundle-adjusting-NeRF/"> Lin et al. (2021) </a> extend Neural Radiance Fields (NeRF), for training without accurate camera poses. They too, apply coarse-to-fine registration on coordinate based scene-representations.
+                  </li>   
+                  <li> 
+                    <a href="https://ishit.github.io/modsine/">Mehta et al. (2021)</a> generalize SIREN with a dual-MLP architecture, where an auxilary network maps input latent codes to parameters that modulate the periodic activations of the synthesis network.
+                  </li>               
+                </ul>      
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -521,7 +511,7 @@
       <div class="section">
         <h2>BibTeX</h2>
         <hr>
-          <div class="bibtexsection">
+          <div class="bibtexsection" style="overflow: auto;">
               @article{hertz2021sape,
                 title={SAPE: Spatially-Adaptive Progressive Encoding for Neural Optimization}, 
                 author={Amir Hertz and Or Perel and Raja Giryes and Olga Sorkine-Hornung and Daniel Cohen-Or},
@@ -535,22 +525,22 @@
     <div class="container">
       <div class="section">
         <div class="row align-items-center mx-md-n1">
-          <div class="col-md-3 px-md-1">
+          <div class="col-3 px-md-1">
             <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
               <source src="resource/fig/sape_animation1.mp4" type="video/mp4">
             </video>
           </div>
-          <div class="col-md-3 px-md-1">
+          <div class="col-3 px-md-1">
             <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
               <source src="resource/fig/sape_animation2.mp4" type="video/mp4">
             </video>
           </div> 
-          <div class="col-md-3 px-md-1">
+          <div class="col-3 px-md-1">
             <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
               <source src="resource/fig/sape_animation3.mp4" type="video/mp4">
             </video>
           </div> 
-          <div class="col-md-3 px-md-1">
+          <div class="col-3 px-md-1">
             <video width="100%" playsinline="" autoplay="" loop="True" preload="" muted="">
               <source src="resource/fig/sape_animation4.mp4" type="video/mp4">
             </video>
@@ -722,6 +712,29 @@
         }, true);
       });
     })();
+    </script>
+
+    <script type="text/javascript">
+
+      let vid_in = document.querySelector("#vid-swap-in");
+      let vid_out = document.querySelector("#vid-swap-out");
+      let vid_calib = document.querySelector("#vid-swap-calib");
+
+      if (vid_in && vid_out) {
+
+        vid_out.addEventListener('mouseenter', (event) => {
+            vid_in.style.display = "none";
+            vid_in.currentTime = vid_calib.currentTime;
+            vid_out.currentTime = vid_calib.currentTime;
+          }, true);
+
+        vid_out.addEventListener('mouseleave', (event) => {
+            vid_in.style.display = "";
+            vid_in.currentTime = vid_calib.currentTime;
+            vid_out.currentTime = vid_calib.currentTime;
+          }, true);
+      }
+
     </script>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
