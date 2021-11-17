@@ -203,12 +203,13 @@ a:hover {
 .rectangle {  
   padding:10px;
   margin: 30px 30px 30px 30px !important;
-  width: calc(50vh);  
+  width: 130%;
   background-color: #fcfcfc;  
   border: 1px solid #92b6f0;
   vertical-align:middle;
   opacity: 0.8;
   align-items: center;
+  text-align:left;
 }  
 
 .photo {
