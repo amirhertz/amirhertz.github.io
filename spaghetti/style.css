@@ -1,0 +1,112 @@
+* {
+  box-sizing: border-box;
+}
+#mainId{
+	display: flex;
+    flex-direction: column;
+    height: 95vh;
+	text-align:left;
+	flex: 1;
+    justify-content: center;
+    align-items: center;
+	font-family: arial;
+	font-size: 14px;
+	line-height: 13px;
+}
+
+
+
+#title{
+
+	font-size: 36px;
+	/*padding-top: 5%;*/
+	text-align: center;
+	line-height: 36px;
+	width:100%;
+	float:left;
+}
+#title2{
+
+	font-size: 20px;
+	margin-top: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	text-align: center;
+	line-height: 20px;
+	width:100%;
+	float:left;
+}
+#fig{
+
+	text-align: center;
+	width:100%;
+	float:left;
+}
+
+#Nav_paper {
+ 	background: none;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+#Nav_paper span {
+  background: url("paper.png") no-repeat;
+  width: 200px;  /* your image width */
+  height: 200px; /* your image height */
+	background-size: 100%;
+  display: inline-block;
+
+}
+#Nav_paper label {
+  display: inline-block;
+}
+#Nav_paper:hover span {
+  background: url("paper.gif") no-repeat;
+	background-size: 100%;
+}
+
+#Nav_code {
+ 	background: none;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+#Nav_code span {
+  background: url("code.png") no-repeat;
+  width: 200px;  /* your image width */
+  height: 200px; /* your image height */
+	background-size: 100%;
+  display: inline-block;
+
+}
+#Nav_code label {
+  display: inline-block;
+}
+
+#Nav_code:hover span {
+  background: url("code.gif") no-repeat;
+	background-size: 100%;
+}
+
+#Nav_video {
+ 	background: none;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+#Nav_video span {
+  background: url("video_fg.png") no-repeat;
+  width: 200px;  /* your image width */
+  height: 200px; /* your image height */
+	background-size: 100%;
+  display: inline-block;
+
+}
+#Nav_video label {
+  display: inline-block;
+}
+
+#Nav_video:hover span {
+  background: url("make_pasta-16.png") no-repeat;
+	background-size: 100%;
+}
