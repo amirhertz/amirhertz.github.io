@@ -15,8 +15,6 @@
 	color: black;
 }
 
-
-
 #title{
 
 	font-size: 36px;
@@ -26,8 +24,6 @@
 	width:100%;
 	float:left;
 }
-
-
 
 #title2{
 
@@ -125,3 +121,13 @@
    display : none;
  }
 
+a:link { text-decoration: none; color: black;}
+
+
+a:visited { text-decoration: none; color: black;}
+
+
+a:hover { text-decoration: none; color: black; }
+
+
+a:active { text-decoration: none; color: black; }
