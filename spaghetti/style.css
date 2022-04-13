@@ -9,9 +9,10 @@
 	flex: 1;
     justify-content: center;
     align-items: center;
-	font-family: arial;
+	font-family:  arial;
 	font-size: 14px;
 	line-height: 13px;
+	color: black;
 }
 
 
@@ -25,6 +26,9 @@
 	width:100%;
 	float:left;
 }
+
+
+
 #title2{
 
 	font-size: 20px;
@@ -59,6 +63,8 @@
 }
 #Nav_paper label {
   display: inline-block;
+  color: black;
+	font-size: 14px;
 }
 #Nav_paper:hover span {
   background: url("paper.gif") no-repeat;
@@ -81,6 +87,8 @@
 }
 #Nav_code label {
   display: inline-block;
+  color: black;
+	font-size: 14px;
 }
 
 #Nav_code:hover span {
@@ -104,9 +112,16 @@
 }
 #Nav_video label {
   display: inline-block;
+  color: black;
+	font-size: 14px;
 }
 
 #Nav_video:hover span {
   background: url("make_pasta-16.png") no-repeat;
 	background-size: 100%;
 }
+
+.hidden {
+   display : none;
+ }
+
