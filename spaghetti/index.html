@@ -30,8 +30,9 @@
 
  </div>
 
-<video id="vid" autoplay muted loop controls>
-  <source src="https://amirhertz.github.io/spaghetti/muted.mp4" type="video/mp4">
+<video id="vid" autoplay loop muted playsinline>
+    <source src="muted.webpm" type="video/webpm">
+    <source src="muted.mp4" type="video/mp4">
 </video>
 
 <div class="container">
@@ -46,36 +47,6 @@
           </div>
       </div>
     </div>
-<!--<script>-->
-<!--    document.getElementById('vid').play();-->
-<!--</script>-->
-<!--<script>-->
-<!--var c = document.getElementById("myCanvas");-->
-<!--var ctx = c.getContext("2d");-->
 
-<!--ctx.font = "bold 36px Arial";-->
-<!--ctx.fillText("SPAGHETTI", 10, 100);-->
-
-
-<!--offset_y = 18-->
-<!--ctx.beginPath();-->
-
-
-<!--ctx.moveTo(90, offset_y + 50);-->
-<!--ctx.bezierCurveTo(120, offset_y + 35, 190, offset_y + 35, 183, offset_y + 50);-->
-
-<!--ctx.moveTo(32, offset_y + 50);-->
-<!--ctx.bezierCurveTo(33, offset_y + 25, 120, offset_y + 25, 120, offset_y + 50);-->
-
-<!--ctx.moveTo(25, offset_y + 50);-->
-<!--ctx.bezierCurveTo(10, offset_y + 5, 140, offset_y + 25, 170, offset_y + 50);-->
-<!--//-->
-<!--// ctx.moveTo(0, offset_y + 50);-->
-<!--// ctx.bezierCurveTo(0, offset_y + 5, 90, offset_y + 5, 140, offset_y + 50);-->
-<!--// ctx.moveTo(10, offset_y + 50);-->
-<!--// ctx.bezierCurveTo(0, offset_y - 10, 170, offset_y - 10, 200, offset_y + 50);-->
-
-<!--ctx.stroke();-->
-<!--</script>-->
 </body>
 </html>
