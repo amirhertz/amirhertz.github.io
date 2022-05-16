@@ -186,23 +186,14 @@ a:active { text-decoration: none; color: black; }
 
 @media only screen  and (orientation: portrait){
    #title  {
-    font-size: 1.75vw;
-	   line-height: 1.75vw;
+    font-size: 2.5vw;
+	   line-height: 2.5vw;
   }
 	#title2  {
-    font-size: 1.2vw;
-	   line-height: 1.2vw;
+    font-size: 1.5vw;
+	   line-height: 1.5vw;
   }
-	.bibtexsection {
-  font-size:12px;
-  /*white-space:pre;*/
-  /*background-color: #f4f4f4;*/
-  text-align:left;
-  /*border: 1px solid #364f75;*/
-	}
-	.container {
-	max-width: 600px;
-	float:left;
-}
+
+
 
 }
