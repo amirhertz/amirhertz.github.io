@@ -190,14 +190,19 @@ a:active { text-decoration: none; color: black; }
 	   line-height: 1.75vw;
   }
 	#title2  {
-    font-size: 1vw;
-	   line-height: 1vw;
+    font-size: 1.2vw;
+	   line-height: 1.2vw;
   }
 	.bibtexsection {
-  font-size:8px;
+  font-size:12px;
   /*white-space:pre;*/
   /*background-color: #f4f4f4;*/
   text-align:left;
   /*border: 1px solid #364f75;*/
+	}
+	.container {
+	max-width: 600px;
+	float:left;
 }
+
 }
