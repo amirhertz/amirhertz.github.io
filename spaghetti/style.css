@@ -16,30 +16,50 @@
 }
 
 #title{
-
-	font-size: 36px;
 	/*padding-top: 5%;*/
 	text-align: center;
-	line-height: 36px;
+	/*line-height: 2.5vw;*/
 	width:100%;
 	float:left;
 }
 
-#title2{
 
-	font-size: 20px;
+#title2{
 	margin-top: 0px;
 	padding-top: 0px;
 	padding-bottom: 0px;
 	text-align: center;
-	line-height: 20px;
 	width:100%;
 	float:left;
 }
+
+
+@media screen {
+  #title {
+    font-size: 36px;
+	  line-height: 36px;
+  }
+	#title2  {
+    font-size: 22px;
+	   line-height: 22px;
+  }
+}
+
+
+
+
+
 #fig{
 
 	text-align: center;
 	width:100%;
+	float:left;
+}
+
+#vid{
+
+	text-align: center;
+	max-width: 800px;
 	float:left;
 }
 
@@ -51,16 +71,29 @@
 }
 #Nav_paper span {
   background: url("paper.png") no-repeat;
-  width: 200px;  /* your image width */
-  height: 200px; /* your image height */
+  width: 150px;  /* your image width */
+  height: 150px; /* your image height */
 	background-size: 100%;
   display: inline-block;
 
 }
 #Nav_paper label {
+	margin-top: -15px;
   display: inline-block;
   color: black;
 	font-size: 14px;
+}
+
+#Nav_paper:hover label {
+  color: black;
+}
+
+#Nav_video:hover label {
+  color: black;
+}
+
+#Nav_code:hover label {
+  color: black;
 }
 #Nav_paper:hover span {
   background: url("paper.gif") no-repeat;
@@ -75,13 +108,14 @@
 }
 #Nav_code span {
   background: url("code.png") no-repeat;
-  width: 200px;  /* your image width */
-  height: 200px; /* your image height */
+  width: 150px;  /* your image width */
+  height: 150px; /* your image height */
 	background-size: 100%;
   display: inline-block;
 
 }
 #Nav_code label {
+	margin-top: -5px;
   display: inline-block;
   color: black;
 	font-size: 14px;
@@ -100,13 +134,14 @@
 }
 #Nav_video span {
   background: url("video_fg.png") no-repeat;
-  width: 200px;  /* your image width */
-  height: 200px; /* your image height */
+  width: 150px;  /* your image width */
+  height: 150px; /* your image height */
 	background-size: 100%;
   display: inline-block;
 
 }
 #Nav_video label {
+	margin-top: -10px;
   display: inline-block;
   color: black;
 	font-size: 14px;
@@ -131,3 +166,38 @@ a:hover { text-decoration: none; color: black; }
 
 
 a:active { text-decoration: none; color: black; }
+
+
+
+.container {
+	max-width: 800px;
+	float:left;
+}
+
+.bibtexsection {
+  font-family: "Courier",monospace;
+  font-size:14px;
+  /*white-space:pre;*/
+  /*background-color: #f4f4f4;*/
+  text-align:left;
+  /*border: 1px solid #364f75;*/
+}
+
+
+@media only screen  and (orientation: portrait){
+   #title  {
+    font-size: 1.75vw;
+	   line-height: 1.75vw;
+  }
+	#title2  {
+    font-size: 1vw;
+	   line-height: 1vw;
+  }
+	.bibtexsection {
+  font-size:8px;
+  /*white-space:pre;*/
+  /*background-color: #f4f4f4;*/
+  text-align:left;
+  /*border: 1px solid #364f75;*/
+}
+}
