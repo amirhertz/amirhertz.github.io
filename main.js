@@ -32,7 +32,7 @@ function add_about(canvas_stage) {
 	let offset = offset_left - menu_width - wMod;
 	let about_text = document.createElement('p');
 	about_text.setAttribute('id','text_a');
-	about_text.style.width=  image_width+'px';
+	about_text.style.width=  image_width+ 100 +'px';
 	about_text.style.textAlign = "left";
 	about_text.style.paddingLeft = offset;
 
